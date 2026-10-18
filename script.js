@@ -10,9 +10,13 @@ document.querySelector("#resourceCount").textContent = cards.length;
 
 themeToggle.addEventListener("click", () => {
   document.body.classList.toggle("light");
+
   const lightMode = document.body.classList.contains("light");
   themeToggle.textContent = lightMode ? "☾" : "☼";
-  themeToggle.setAttribute("aria-label", lightMode ? "Bật giao diện tối" : "Bật giao diện sáng");
+  themeToggle.setAttribute(
+    "aria-label",
+    lightMode ? "Bật giao diện tối" : "Bật giao diện sáng"
+  );
 });
 
 function updateCards() {
@@ -22,9 +26,11 @@ function updateCards() {
   cards.forEach((card) => {
     const name = (card.dataset.name || "").toLocaleLowerCase("vi");
     const platform = card.dataset.platform || "";
+
     const matchesSearch = name.includes(keyword);
     const matchesFilter = currentFilter === "all" || platform === currentFilter;
     const visible = matchesSearch && matchesFilter;
+
     card.hidden = !visible;
     if (visible) visibleCount++;
   });
@@ -33,6 +39,7 @@ function updateCards() {
 }
 
 searchInput.addEventListener("input", updateCards);
+
 filters.forEach((button) => {
   button.addEventListener("click", () => {
     filters.forEach((item) => item.classList.remove("active"));
@@ -41,3 +48,36 @@ filters.forEach((button) => {
     updateCards();
   });
 });
+
+/* Hiệu ứng chữ đánh máy */
+const typingElement = document.getElementById("typing-rainbow");
+
+if (typingElement) {
+  const text = "This game is easy for me..";
+  let index = 0;
+  let deleting = true;
+
+  function typeText() {
+    if (!deleting) {
+      index++;
+      typingElement.textContent = text.slice(0, index);
+
+      if (index >= text.length) {
+        deleting = false;
+        setTimeout(typeText, 1500);
+        return;
+      }
+    } else {
+      index--;
+      typingElement.textContent = text.slice(0, index);
+
+      if (index <= 0) {
+        deleting = false;
+      }
+    }
+
+    setTimeout(typeText, deleting ? 35 : 65);
+  }
+
+  typeText();
+}
