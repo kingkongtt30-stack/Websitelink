@@ -28,6 +28,41 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" />
     <link rel="stylesheet" href="https://vthangios.xyz/assets/css/style.2.0.css?v=1791295256" />
+    <style>
+      body.mquang-light-theme {
+        background: #f4f6fc !important;
+        color: #172038 !important;
+      }
+      body.mquang-light-theme .vthangios-nav,
+      body.mquang-light-theme .vthangios-app-item,
+      body.mquang-light-theme .vthangios-music-card,
+      body.mquang-light-theme .vthangios-yt-banner,
+      body.mquang-light-theme .vthangios-notif-panel,
+      body.mquang-light-theme .vthangios-preview-modal {
+        background-color: #fff !important;
+        color: #172038 !important;
+      }
+      body.mquang-light-theme .vthangios-name,
+      body.mquang-light-theme .vthangios-iam,
+      body.mquang-light-theme .vthangios-headline,
+      body.mquang-light-theme .vthangios-section-title,
+      body.mquang-light-theme .vthangios-app-name,
+      body.mquang-light-theme .vthangios-app-desc,
+      body.mquang-light-theme .vthangios-footer,
+      body.mquang-light-theme .vthangios-music-title,
+      body.mquang-light-theme .vthangios-music-artist,
+      body.mquang-light-theme .vthangios-yt-title,
+      body.mquang-light-theme .vthangios-yt-handle,
+      body.mquang-light-theme .vthangios-yt-meta {
+        color: #172038 !important;
+      }
+      body.mquang-light-theme .vthangios-theme-btn {
+        background: #fff !important;
+        color: #172038 !important;
+        border-color: rgba(32,48,83,.18) !important;
+      }
+    </style>
+
 </head>
 <body>
     <main role="main">
@@ -378,5 +413,49 @@
             &copy; Designer by Minh Quang iOS 2026        </footer>
     </main>
     
+
+    <script>
+    (function () {
+      "use strict";
+      const key = "mquang-theme";
+      const button = document.getElementById("vthangios-theme-toggle");
+      const icon = document.getElementById("vthangios-theme-icon");
+
+      function applyTheme(theme) {
+        const light = theme === "light";
+        document.body.classList.toggle("mquang-light-theme", light);
+        if (icon) {
+          icon.classList.toggle("bi-sun-fill", !light);
+          icon.classList.toggle("bi-moon-fill", light);
+        }
+        if (button) {
+          button.setAttribute("aria-label", light ? "Chuyển sang giao diện tối" : "Chuyển sang giao diện sáng");
+          button.setAttribute("title", light ? "Chuyển sang giao diện tối" : "Chuyển sang giao diện sáng");
+        }
+      }
+
+      // Giữ tương thích với onclick="vtToggleTheme()" trong nút ở HTML.
+      window.vtToggleTheme = function () {
+        const isLight = document.body.classList.contains("mquang-light-theme");
+        const next = isLight ? "dark" : "light";
+        applyTheme(next);
+        try { localStorage.setItem(key, next); } catch (error) {}
+      };
+
+      function init() {
+        let saved = null;
+        try { saved = localStorage.getItem(key); } catch (error) {}
+        // Mặc định giao diện sáng, sau đó khôi phục lựa chọn đã lưu.
+        applyTheme(saved === "dark" ? "dark" : "light");
+      }
+
+      if (document.readyState === "loading") {
+        document.addEventListener("DOMContentLoaded", init);
+      } else {
+        init();
+      }
+    })();
+    </script>
+
 </body>
 </html>
