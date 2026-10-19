@@ -793,3 +793,37 @@ footer p, .footer p, .site-footer p {
   height: 100%;
   object-fit: cover;
 }
+
+/* Bổ sung giao diện sáng cho HTML hiện tại (các class vthangios-*) */
+body.mquang-light-theme {
+  background: #f4f6fc !important;
+  color: #172038 !important;
+}
+body.mquang-light-theme .vthangios-nav,
+body.mquang-light-theme .vthangios-app-item,
+body.mquang-light-theme .vthangios-music-card,
+body.mquang-light-theme .vthangios-yt-banner,
+body.mquang-light-theme .vthangios-notif-panel,
+body.mquang-light-theme .vthangios-preview-modal {
+  background-color: #ffffff !important;
+  color: #172038 !important;
+}
+body.mquang-light-theme .vthangios-name,
+body.mquang-light-theme .vthangios-iam,
+body.mquang-light-theme .vthangios-headline,
+body.mquang-light-theme .vthangios-section-title,
+body.mquang-light-theme .vthangios-app-name,
+body.mquang-light-theme .vthangios-app-desc,
+body.mquang-light-theme .vthangios-footer,
+body.mquang-light-theme .vthangios-music-title,
+body.mquang-light-theme .vthangios-music-artist,
+body.mquang-light-theme .vthangios-yt-title,
+body.mquang-light-theme .vthangios-yt-handle,
+body.mquang-light-theme .vthangios-yt-meta {
+  color: #172038 !important;
+}
+body.mquang-light-theme .vthangios-theme-btn {
+  background: #ffffff !important;
+  color: #172038 !important;
+  border-color: rgba(32, 48, 83, .18) !important;
+}
